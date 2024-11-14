@@ -10,8 +10,8 @@ class ClientModel {
   final DateTime dateIni;
   final DateTime dateEnd;
   final DateTime dateAvaliable;
+  final DateTime? dateBirthday;
   final List<PaymentModel> datesPayment;
-  final num total;
   final String observation;
   final bool active;
 
@@ -21,8 +21,8 @@ class ClientModel {
     required this.dateIni,
     required this.dateEnd,
     required this.dateAvaliable,
+    this.dateBirthday,
     this.datesPayment = const [],
-    this.total = 0,
     this.observation = '',
     this.active = true,
   });
@@ -41,8 +41,8 @@ class ClientModel {
     DateTime? dateIni,
     DateTime? dateEnd,
     DateTime? dateAvaliable,
+    DateTime? dateBirthday,
     List<PaymentModel>? datesPayment,
-    num? total,
     String? observation,
     bool? active,
   }) {
@@ -52,8 +52,8 @@ class ClientModel {
       dateIni: dateIni ?? this.dateIni,
       dateEnd: dateEnd ?? this.dateEnd,
       dateAvaliable: dateAvaliable ?? this.dateAvaliable,
+      dateBirthday: dateBirthday ?? this.dateBirthday,
       datesPayment: datesPayment ?? this.datesPayment,
-      total: total ?? this.total,
       observation: observation ?? this.observation,
       active: active ?? this.active,
     );
@@ -67,8 +67,10 @@ class ClientModel {
     result.addAll({'dateIni': dateIni.millisecondsSinceEpoch});
     result.addAll({'dateEnd': dateEnd.millisecondsSinceEpoch});
     result.addAll({'dateAvaliable': dateAvaliable.millisecondsSinceEpoch});
+    if (dateBirthday != null) {
+      result.addAll({'dateBirthday': dateBirthday!.millisecondsSinceEpoch});
+    }
     result.addAll({'datesPayment': datesPayment.map((x) => x.toMap()).toList()});
-    result.addAll({'total': total});
     result.addAll({'observation': observation});
     result.addAll({'active': active});
 
@@ -82,10 +84,10 @@ class ClientModel {
       dateIni: DateTime.fromMillisecondsSinceEpoch(map['dateIni']),
       dateEnd: DateTime.fromMillisecondsSinceEpoch(map['dateEnd']),
       dateAvaliable: DateTime.fromMillisecondsSinceEpoch(map['dateAvaliable']),
+      dateBirthday: map['dateBirthday'] != null ? DateTime.fromMillisecondsSinceEpoch(map['dateBirthday']) : null,
       datesPayment: List<PaymentModel>.from(map['datesPayment']?.map((x) => PaymentModel.fromMap(x))),
-      total: map['total'] ?? 0,
       observation: map['observation'] ?? '',
-      active: map['active'],
+      active: map['active'] ?? false,
     );
   }
 
@@ -95,7 +97,7 @@ class ClientModel {
 
   @override
   String toString() {
-    return 'ClientModel(id: $id, name: $name, dateIni: $dateIni, dateEnd: $dateEnd, dateAvaliable: $dateAvaliable, datesPayment: $datesPayment, total: $total, observation: $observation, active: $active)';
+    return 'ClientModel(id: $id, name: $name, dateIni: $dateIni, dateEnd: $dateEnd, dateAvaliable: $dateAvaliable, dateBirthday: $dateBirthday, datesPayment: $datesPayment, observation: $observation, active: $active)';
   }
 
   @override
@@ -108,8 +110,8 @@ class ClientModel {
         other.dateIni == dateIni &&
         other.dateEnd == dateEnd &&
         other.dateAvaliable == dateAvaliable &&
+        other.dateBirthday == dateBirthday &&
         listEquals(other.datesPayment, datesPayment) &&
-        other.total == total &&
         other.observation == observation &&
         other.active == active;
   }
@@ -121,8 +123,8 @@ class ClientModel {
         dateIni.hashCode ^
         dateEnd.hashCode ^
         dateAvaliable.hashCode ^
+        dateBirthday.hashCode ^
         datesPayment.hashCode ^
-        total.hashCode ^
         observation.hashCode ^
         active.hashCode;
   }

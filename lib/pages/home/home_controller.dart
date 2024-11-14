@@ -1,5 +1,6 @@
 import 'package:agenda_pagamentos/core/models/client_model.dart';
 import 'package:agenda_pagamentos/core/repositories/i_client_repository.dart';
+import 'package:diacritic/diacritic.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
@@ -21,5 +22,10 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getClients() async => _clients.value = await _clientRepository.getClients();
+  Future<void> getClients() async {
+    final listClients = await _clientRepository.getClients();
+    listClients
+        .sort((a, b) => removeDiacritics(a.name.toLowerCase()).compareTo(removeDiacritics(b.name.toLowerCase())));
+    _clients.value = listClients;
+  }
 }

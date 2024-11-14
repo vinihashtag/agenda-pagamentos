@@ -1,5 +1,4 @@
 import 'package:agenda_pagamentos/core/extensions/date_extension.dart';
-import 'package:agenda_pagamentos/core/extensions/num_extension.dart';
 import 'package:agenda_pagamentos/core/extensions/strings_extension.dart';
 import 'package:agenda_pagamentos/core/models/client_model.dart';
 import 'package:agenda_pagamentos/core/models/payment_model.dart';
@@ -27,7 +26,7 @@ class ClientController extends GetxController {
   final TextEditingController dateIniController = TextEditingController();
   final TextEditingController dateEndController = TextEditingController();
   final TextEditingController dateAvaliableController = TextEditingController();
-  final TextEditingController totalController = TextEditingController();
+  final TextEditingController dateBirthdayController = TextEditingController();
   final TextEditingController observationController = TextEditingController();
   final TextEditingController datePaymentController = TextEditingController();
   final TextEditingController valuePaymentController = TextEditingController();
@@ -44,7 +43,7 @@ class ClientController extends GetxController {
       dateIniController.text = _clientModel.dateIni.formatddMMyyyy;
       dateEndController.text = _clientModel.dateEnd.formatddMMyyyy;
       dateAvaliableController.text = _clientModel.dateAvaliable.formatddMMyyyy;
-      totalController.text = _clientModel.total.formattedMoneyBR;
+      dateBirthdayController.text = _clientModel.dateBirthday?.formatddMMyyyy ?? '';
       observationController.text = _clientModel.observation;
       payments.addAll(List.from(_clientModel.datesPayment));
       active.value = _clientModel.active;
@@ -60,7 +59,7 @@ class ClientController extends GetxController {
       dateIni: dateIniController.text.toDate,
       dateEnd: dateEndController.text.toDate,
       dateAvaliable: dateAvaliableController.text.toDate,
-      total: totalController.text.toMoneyDB,
+      dateBirthday: dateBirthdayController.text.toDateNullable,
       observation: observationController.text.trim(),
       active: active.value,
     ));
@@ -148,7 +147,7 @@ class ClientController extends GetxController {
     dateIniController.dispose();
     dateEndController.dispose();
     dateAvaliableController.dispose();
-    totalController.dispose();
+    dateBirthdayController.dispose();
     observationController.dispose();
     datePaymentController.dispose();
     valuePaymentController.dispose();

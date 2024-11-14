@@ -117,17 +117,25 @@ class ClientPage extends GetWidget<ClientController> {
 
                 const SizedBox(width: 16),
 
-                // * Total
+                // * Data Nascimento
                 Expanded(
                   child: CustomTextFormField(
-                    labelText: 'Valor Total',
+                    labelText: 'Data Nascimento',
+                    controller: controller.dateBirthdayController,
+                    readOnly: true,
                     textAlign: TextAlign.center,
-                    controller: controller.totalController,
-                    keyboardType: const TextInputType.numberWithOptions(),
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      CentavosInputFormatter(moeda: true),
-                    ],
+                    onTap: () => showDatePicker(
+                      context: context,
+                      currentDate: DateTime.now(),
+                      firstDate: DateTime(1900),
+                      lastDate: DateTime.now(),
+                      initialDate: controller.dateBirthdayController.text.toDateNullable,
+                      locale: const Locale('pt', 'BR'),
+                    ).then((date) {
+                      if (date != null) {
+                        controller.dateBirthdayController.text = date.formatddMMyyyy;
+                      }
+                    }),
                   ),
                 ),
               ],
@@ -354,13 +362,13 @@ class ClientPage extends GetWidget<ClientController> {
                   controller.nameController,
                   controller.dateIniController,
                   controller.dateEndController,
-                  controller.totalController,
+                  controller.dateBirthdayController,
                 ]),
                 builder: (_, __) {
                   final bool isValid = controller.nameController.text.trim().isNotEmpty &&
                       controller.dateIniController.text.trim().isNotEmpty &&
                       controller.dateEndController.text.trim().isNotEmpty &&
-                      controller.totalController.text.trim().toMoneyDB >= 0;
+                      controller.dateBirthdayController.text.trim().toMoneyDB >= 0;
                   return Center(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 16, bottom: 20),
