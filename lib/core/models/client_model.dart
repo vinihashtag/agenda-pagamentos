@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:agenda_pagamentos/core/extensions/date_extension.dart';
 import 'package:flutter/foundation.dart';
 
 import 'payment_model.dart';
@@ -31,7 +32,7 @@ class ClientModel {
         id: '',
         name: '',
         dateIni: DateTime.now(),
-        dateEnd: DateTime.now().add(const Duration(days: 90)),
+        dateEnd: DateTime.now(),
         dateAvaliable: DateTime.now(),
       );
 
@@ -107,10 +108,9 @@ class ClientModel {
     return other is ClientModel &&
         other.id == id &&
         other.name == name &&
-        other.dateIni == dateIni &&
-        other.dateEnd == dateEnd &&
-        other.dateAvaliable == dateAvaliable &&
-        other.dateBirthday == dateBirthday &&
+        other.dateEnd.isSameDate(dateEnd) &&
+        other.dateAvaliable.isSameDate(dateAvaliable) &&
+        (dateBirthday?.isSameDate(other.dateBirthday ?? DateTime.now()) ?? true) &&
         listEquals(other.datesPayment, datesPayment) &&
         other.observation == observation &&
         other.active == active;

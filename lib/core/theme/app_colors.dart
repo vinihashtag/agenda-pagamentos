@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 final class AppColors {
   AppColors._();
   // * Colors default app
-  static const Color primary = Colors.blue;
-  static const Color secondary = Color.fromARGB(255, 11, 62, 138);
+  static const Color primary = Color.fromARGB(255, 56, 146, 59);
+  static const Color secondary = Color.fromARGB(255, 92, 204, 96);
 
   static const Color statusBar = Color.fromARGB(255, 0, 0, 0);
   static const Color disabled = Color.fromARGB(255, 171, 171, 171);

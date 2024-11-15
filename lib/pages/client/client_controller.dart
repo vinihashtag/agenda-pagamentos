@@ -13,23 +13,24 @@ class ClientController extends GetxController {
 
   // * Variables
   ClientModel _clientModel = ClientModel.empty();
-  ClientModel? _clientModelInitial = ClientModel.empty();
+  ClientModel _clientModelInitial = ClientModel.empty();
   bool get isEditing => _clientModel != _clientModelInitial;
+  bool get isNew => _clientModel.id.trim().isEmpty;
 
   // * Observables
-  final RxList<PaymentModel> payments = RxList<PaymentModel>();
-  final RxBool paid = RxBool(false);
-  final RxBool active = RxBool(true);
+  final payments = RxList<PaymentModel>();
+  final paid = RxBool(false);
+  final active = RxBool(true);
 
   // * TextEditControllers
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController dateIniController = TextEditingController();
-  final TextEditingController dateEndController = TextEditingController();
-  final TextEditingController dateAvaliableController = TextEditingController();
-  final TextEditingController dateBirthdayController = TextEditingController();
-  final TextEditingController observationController = TextEditingController();
-  final TextEditingController datePaymentController = TextEditingController();
-  final TextEditingController valuePaymentController = TextEditingController();
+  final nameController = TextEditingController();
+  final dateIniController = TextEditingController();
+  final dateEndController = TextEditingController();
+  final dateAvaliableController = TextEditingController();
+  final dateBirthdayController = TextEditingController();
+  final observationController = TextEditingController();
+  final datePaymentController = TextEditingController();
+  final valuePaymentController = TextEditingController();
 
   // * FocusNode
   final FocusNode valueFocus = FocusNode();
@@ -49,6 +50,18 @@ class ClientController extends GetxController {
       active.value = _clientModel.active;
     }
     super.onInit();
+  }
+
+  void copyClient() {
+    _clientModel = _clientModel.copyWith(
+      name: nameController.text.trim(),
+      dateIni: dateIniController.text.toDate,
+      dateEnd: dateEndController.text.toDate,
+      dateAvaliable: dateAvaliableController.text.toDate,
+      dateBirthday: dateBirthdayController.text.toDateNullable,
+      observation: observationController.text.trim(),
+      active: active.value,
+    );
   }
 
   Future<void> saveClient() async {

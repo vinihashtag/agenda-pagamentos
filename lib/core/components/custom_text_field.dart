@@ -24,6 +24,7 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? suffixIcon;
   final String? labelText;
   final TextAlign? textAlign;
+  final TextInputAction? textInputAction;
 
   const CustomTextFormField({
     super.key,
@@ -48,6 +49,7 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.labelText,
     this.textAlign,
+    this.textInputAction,
   });
 
   @override
@@ -85,6 +87,7 @@ class CustomTextFormField extends StatelessWidget {
           validator: validator,
           readOnly: readOnly,
           textCapitalization: textCapitalization,
+          textInputAction: textInputAction ?? TextInputAction.done,
           decoration: InputDecoration(
             hintText: hintText,
             hintMaxLines: 2,

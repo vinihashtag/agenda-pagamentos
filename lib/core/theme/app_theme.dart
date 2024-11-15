@@ -34,14 +34,20 @@ final class AppTheme {
           centerTitle: true,
           titleSpacing: 0,
           titleTextStyle: const TextStyle(
-            color: Colors.blue,
+            color: Colors.black54,
             fontWeight: FontWeight.bold,
             fontSize: 20,
           ),
         ),
         actionIconTheme: ActionIconThemeData(
-          backButtonIconBuilder: (context) => Icon(Icons.adaptive.arrow_back_rounded),
-          closeButtonIconBuilder: (context) => const Icon(Icons.close_rounded),
+          backButtonIconBuilder: (context) => Icon(
+            Icons.adaptive.arrow_back_rounded,
+            color: Colors.black54,
+          ),
+          closeButtonIconBuilder: (context) => const Icon(
+            Icons.close_rounded,
+            color: Colors.black54,
+          ),
         ),
         inputDecorationTheme: _defaultInputDecoration,
         dropdownMenuTheme: DropdownMenuThemeData(
@@ -61,7 +67,7 @@ final class AppTheme {
             dividerColor: Colors.grey,
             overlayColor: const WidgetStatePropertyAll(Colors.transparent),
             labelStyle: AppTypography.bodyText2.copyWith(
-              color: Colors.blue,
+              color: AppColors.primary,
               fontWeight: FontWeight.w600,
               height: 1.1,
               letterSpacing: 1.2,

@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:agenda_pagamentos/core/extensions/date_extension.dart';
+
 class PaymentModel {
   final DateTime datePayment;
   final num value;
@@ -52,7 +54,10 @@ class PaymentModel {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is PaymentModel && other.datePayment == datePayment && other.value == value && other.paid == paid;
+    return other is PaymentModel &&
+        other.datePayment.isSameDate(datePayment) &&
+        other.value == value &&
+        other.paid == paid;
   }
 
   @override

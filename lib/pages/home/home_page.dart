@@ -41,7 +41,11 @@ class HomePage extends GetView<HomeController> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Icons.info_outline_rounded, size: 100, color: Colors.blue[300]),
+                                Icon(
+                                  Icons.info_outline_rounded,
+                                  size: 100,
+                                  color: Theme.of(context).primaryColor,
+                                ),
                                 const SizedBox(height: 16),
                                 const Text(
                                   'Você não poassui nenhum cliente ativo registrado',
@@ -72,7 +76,11 @@ class HomePage extends GetView<HomeController> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Icons.info_outline_rounded, size: 100, color: Colors.blue[300]),
+                                Icon(
+                                  Icons.info_outline_rounded,
+                                  size: 100,
+                                  color: Theme.of(context).primaryColor,
+                                ),
                                 const SizedBox(height: 16),
                                 const Text(
                                   'Você não poassui nenhum cliente inativo registrado',
@@ -126,7 +134,7 @@ class _CardClientWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 3,
-      color: Colors.grey.shade100,
+      color: client.active ? Colors.greenAccent.shade100 : Colors.grey.shade100,
       child: ListTile(
         dense: true,
         contentPadding: const EdgeInsets.only(left: 12, right: 8),
